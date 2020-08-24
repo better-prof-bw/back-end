@@ -21,7 +21,7 @@ router.post("/register", (req, res) => {
         // save the user to the database
         Users.add(credentials)
             .then(user => {
-                res.status(201).json({ data: user });
+                res.status(201).json({ message: "Registration was successful!" });
             })
             .catch(error => {
                 res.status(500).json({ message: error.message });
@@ -44,7 +44,7 @@ router.post("/login", (req, res) => {
                     const token = signToken(user);
 
                     res.status(200).json({
-                        message: "Welcome to our API",
+                        message: "Login was successful!",
                         token,
                     });
                 } else {
