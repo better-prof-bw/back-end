@@ -23,16 +23,21 @@ module.exports = {
   },
 
   production: {
-    client: "pg",
+    client: "sqlite3",
+    useNullAsDefault: true,
+    connection: {
+      filename: "./data/pintereach.db3",
+    },
     pool: {
-      min: 2,
-      max: 10,
+      afterCreate: (conn, done) => {
+        conn.run("PRAGMA foreign_keys = ON", done);
+      },
     },
     migrations: {
-      directory: "./database/migrations",
+      directory: "./data/migrations",
     },
     seeds: {
-      directory: "./database/seeds",
+      directory: "./data/seeds",
     },
   },
 };
