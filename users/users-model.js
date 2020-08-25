@@ -18,7 +18,7 @@ function findBy(filter) {
         .select("u.id", "u.username", "u.password", "r.name as role")
         .orderBy("u.id");
 }
-
+ 
 async function add(user) {
     try {
         const [id] = await db("users").insert(user, "id");

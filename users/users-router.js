@@ -1,5 +1,6 @@
 const router = require("express").Router();
-
+const Project = require('../projects/project-model');
+const Students = require('../student/student-model')
 const Users = require("./users-model.js");
 const restricted = require("../auth/restricted-middleware.js");
 
@@ -11,18 +12,4 @@ router.get("/",restricted, (req, res) => {
         .catch(err => res.send(err));
 });
 
-router.put("/:id", restricted, checkRole(["professor"]), (req, res) => {
-    res.status(200).json({ hello: "you made it!" });
-});
-
-function checkRole(roles) {
-    return function (req, res, next) {
-        if (roles.includes(req.decodedToken.role)) {
-            next();
-        } else {
-            res.status(403).json({ you: "can't touch this!" });
-        }
-    };
-}
-
-module.exports = router;
+module.exports = router; 
