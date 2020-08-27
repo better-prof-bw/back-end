@@ -66,8 +66,8 @@ router.post("/:user_id/students",(req, res) => {
             res.status(500).json({ message: error.message });
         });
 });
-router.put('/:user_id/students/:student_id', (req, res) => {
-    Students.update(req.params.user_id, req.params.student_id,  req.body)
+router.put('/:user_id/students/:id', (req, res) => {
+    Students.update(req.params.id, req.body)
     .then(Students=>{
       res.status(200).json(Students)
     })
@@ -78,8 +78,8 @@ router.put('/:user_id/students/:student_id', (req, res) => {
       })
     })
 });
-router.delete('/:user_id/students/:student_id' , (req, res) => {
-    Students.remove( req.params.user_id, req.params.student_id)
+router.delete('/:user_id/students/:id' , (req, res) => {
+    Students.remove( req.params.id)
     .then(()=>{
         res.status(200).json({ message: 'The Students has been deleted' })
     })
