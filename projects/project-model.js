@@ -39,13 +39,13 @@ function findById(id) {
 function update(user_id, project_id, changes) {
     return db('projects')
       .where("professor", user_id)
-      .andWhere("project", project_id)
+      .andWhere("id", project_id)
       .update(changes);
   }
   
 function remove(user_id, project_id) {
 return db('projects')
     .where("professor", user_id)
-    .andWhere("project", project_id)
+    .andWhere("id", project_id)
     .del();
 }
