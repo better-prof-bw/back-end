@@ -32,7 +32,7 @@ async function add(message, sender_id) {
     }
 } 
 function findById(id) {
-    return db("projects").where({ id }).first();
+    return db("messages").where({ id }).first();
 }
 function findByInteraction(id, reciver_id) {
     return db("messages")
