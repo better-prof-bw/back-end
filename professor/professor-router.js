@@ -23,7 +23,7 @@ router.get("/:user_id/projects",(req, res) => {
         .catch(err => res.send(err));
 });
 router.put('/:user_id/projects/:project_id', (req, res) => {
-    Project.update(req.params.user_id, req.params.project_id,  res.body)
+    Project.update(req.params.user_id, req.params.project_id,  req.body)
     .then(projects=>{
       res.status(200).json(projects)
     })
@@ -67,7 +67,7 @@ router.post("/:user_id/students",(req, res) => {
         });
 });
 router.put('/:user_id/students/:student_id', (req, res) => {
-    Students.update(req.params.user_id, req.params.student_id,  res.body)
+    Students.update(req.params.user_id, req.params.student_id,  req.body)
     .then(Students=>{
       res.status(200).json(Students)
     })

@@ -10,7 +10,7 @@ router.get("/",(req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    Messages.update(req.params.user_id, res.body)
+    Messages.update(req.params.id, req.body)
     .then(Messages=>{
       res.status(200).json(Messages)
     })
@@ -23,7 +23,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id' , (req, res) => {
-    Messages.remove( req.params.user_id)
+    Messages.remove( req.params.id)
     .then(()=>{
         res.status(200).json({ message: 'The Message has been deleted' })
     })
