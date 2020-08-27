@@ -5,7 +5,8 @@ module.exports = {
     find,
     findByInteraction,
     update,
-    remove
+    remove,
+    findById
 };
 
 //gets list of all messages users
@@ -30,7 +31,9 @@ async function add(message, sender_id) {
         throw error;
     }
 } 
-
+function findById(id) {
+    return db("projects").where({ id }).first();
+}
 function findByInteraction(id, reciver_id) {
     return db("messages")
     .where('sender', id)
