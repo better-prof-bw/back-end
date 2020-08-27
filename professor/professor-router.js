@@ -78,7 +78,7 @@ router.put('/:user_id/students/:student_id', (req, res) => {
       })
     })
 });
-router.delete('/:user_id/students/:student_id' , (req, res) => {
+router.delete('/:id' , (req, res) => {
     Students.remove( req.params.user_id, req.params.student_id)
     .then(()=>{
         res.status(200).json({ message: 'The Students has been deleted' })

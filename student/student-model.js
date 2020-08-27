@@ -34,16 +34,14 @@ function findById(id) {
     return db("students").where({ id }).first();
 }
 
-function update(user_id, student_id, changes) {
+function update(id, changes) {
     return db('students')
-      .where("professor", user_id)
-      .andWhere("student", student_id)
+      .where("id", id)
       .update(changes);
   }
   
-function remove(user_id, student_id) {
+function remove(id) {
 return db('students')
-    .where("professor", user_id)
-    .andWhere("student", student_id)
+    .where("id", id)
     .del();
 }
