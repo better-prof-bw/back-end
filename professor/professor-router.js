@@ -3,7 +3,7 @@ const Project = require('../projects/project-model');
 const Students = require('../student/student-model');
 const Messages = require('../messages/messages-model')
 const restricted = require("../auth/restricted-middleware.js");
-
+/////////////////////////projects//////////////////////////////////////
 router.post("/:user_id/projects",(req, res) => {
     const project = req.body
 
@@ -22,8 +22,32 @@ router.get("/:user_id/projects",(req, res) => {
         })
         .catch(err => res.send(err));
 });
+router.put('/:user_id/projects/:project_id', (req, res) => {
+    Project.update(req.params.user_id, req.params.project_id,  res.body)
+    .then(projects=>{
+      res.status(200).json(projects)
+    })
+    .catch(err=>{
+      console.log(err)
+      res.status(500).json({
+        message: "Error updating"
+      })
+    })
+});
+router.delete('/:user_id/projects/:project_id' , (req, res) => {
+    Project.remove( req.params.user_id, req.params.project_id)
+    .then(()=>{
+        res.status(200).json({ message: 'The projects has been deleted' })
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({
+        message: "Error removing"
+        })
+})
+});
 
-
+///////////////////////////students////////////////////////////////////
 router.get("/:user_id/students",(req, res) => {
     Students.find(req.params.user_id)
         .then(students => {
@@ -42,7 +66,32 @@ router.post("/:user_id/students",(req, res) => {
             res.status(500).json({ message: error.message });
         });
 });
+router.put('/:user_id/students/:student_id', (req, res) => {
+    Students.update(req.params.user_id, req.params.student_id,  res.body)
+    .then(Students=>{
+      res.status(200).json(Students)
+    })
+    .catch(err=>{
+      console.log(err)
+      res.status(500).json({
+        message: "Error updating"
+      })
+    })
+});
+router.delete('/:user_id/students/:student_id' , (req, res) => {
+    Students.remove( req.params.user_id, req.params.student_id)
+    .then(()=>{
+        res.status(200).json({ message: 'The Students has been deleted' })
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({
+        message: "Error removing"
+        })
+})
+});
 
+////////////////////////////messages///////////////////////////////////////
 router.post("/:user_id/messages",(req, res) => {
     Messages.add(req.body, req.params.user_id)
         .then((message) => { 

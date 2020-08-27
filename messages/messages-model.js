@@ -3,7 +3,9 @@ const db = require("../database/connection.js");
 module.exports = {
     add,
     find,
-    findById,
+    findByInteraction,
+    update,
+    remove
 };
 
 //gets list of all messages users
@@ -29,8 +31,20 @@ async function add(message, sender_id) {
     }
 } 
 
-function findById(id) {
-    return db("messages").where({ id }).first();
+function findByInteraction(id, reciver_id) {
+    return db("messages")
+    .where('sender', id)
+    .andWhere('reciver', reciver_id)
 }
 
-
+function update(id, changes) {
+    return db('messages')
+      .where("id", id)
+      .update(changes);
+  }
+  
+function remove(id) {
+return db('messages')
+    .where("id", id)
+    .del();
+}
