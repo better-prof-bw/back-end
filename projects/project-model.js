@@ -5,6 +5,8 @@ module.exports = {
     find,
     findByProfessor,
     findById,
+    update,
+    remove
 };
 
 function find() {
@@ -32,4 +34,18 @@ async function add(project, user_id) {
 
 function findById(id) {
     return db("projects").where({ id }).first();
+}
+
+function update(user_id, project_id, changes) {
+    return db('projects')
+      .where("professor", user_id)
+      .andWhere("project", project_id)
+      .update(changes);
+  }
+  
+function remove(user_id, project_id) {
+return db('projects')
+    .where("professor", user_id)
+    .andWhere("project", project_id)
+    .del();
 }

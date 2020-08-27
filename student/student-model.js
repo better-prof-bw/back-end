@@ -4,6 +4,8 @@ module.exports = {
     add,
     find,
     findById,
+    update,
+    remove
 };
 
 //gets list of all student users
@@ -30,4 +32,18 @@ async function add(student, professor_id) {
 
 function findById(id) {
     return db("students").where({ id }).first();
+}
+
+function update(user_id, student_id, changes) {
+    return db('students')
+      .where("professor", user_id)
+      .andWhere("student", student_id)
+      .update(changes);
+  }
+  
+function remove(user_id, student_id) {
+return db('students')
+    .where("professor", user_id)
+    .andWhere("student", student_id)
+    .del();
 }
