@@ -35,6 +35,7 @@ router.put('/:user_id/projects/:project_id', (req, res) => {
     })
 });
 router.delete('/:user_id/projects/:project_id' , (req, res) => {
+    console.log(req.params.user_id, req.params.project_id)
     Project.remove( req.params.user_id, req.params.project_id)
     .then(()=>{
         res.status(200).json({ message: 'The projects has been deleted' })
